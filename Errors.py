@@ -1,4 +1,4 @@
-# $Id$
+# $Id: Errors.py 244 2003-04-21 09:44:09Z mhagger $
 
 # Copyright (C) 2001-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #

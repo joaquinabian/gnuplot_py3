@@ -1,4 +1,4 @@
-# $Id$
+# $Id: gp_java.py 291 2006-03-03 08:58:48Z mhagger $
 
 # Copyright (C) 2002-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #

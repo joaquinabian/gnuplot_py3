@@ -1,4 +1,6 @@
-# $Id$
+#! /usr/bin/env python
+
+# $Id: utils.py 297 2007-03-30 11:25:28Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -18,17 +20,28 @@ import numpy
 def float_array(m):
     """Return the argument as a numpy array of type at least 'Float32'.
 
-    Convert input data to numpy array first (in case it is a python
-    native type), then return it if it is of dtype 'float64' or
-    'float32'. Try to upcast everything else to float32.
+    Leave 'Float64' unchanged, but upcast all other types to
+    'Float32'.  Allow also for the possibility that the argument is a
+    python native type that can be converted to a numpy array using
+    'numpy.asarray()', but in that case don't worry about
+    downcasting to single-precision float.
+
     """
 
-    m = numpy.asarray(m)
-    if m.dtype in ('float64','float32'):
-        return m
-    else:
-        return numpy.array(m,dtype=numpy.float32)
-
+    try:
+        # Try Float32 (this will refuse to downcast)
+        return numpy.asarray(m, numpy.float32)
+    except TypeError:
+        # That failure might have been because the input array was
+        # of a wider data type than float32; try to convert to the
+        # largest floating-point type available:
+        # NOTE TBD: I'm not sure float_ is the best data-type for this...
+        try:
+            return numpy.asarray(m, numpy.float_)
+        except TypeError:
+            # TBD: Need better handling of this error!
+            print("Fatal: array dimensions not equal!")
+            return None
 
 def write_array(f, set,
                 item_sep=' ',
@@ -61,7 +74,7 @@ def write_array(f, set,
     if len(set.shape) == 1:
         (columns,) = set.shape
         assert columns > 0
-        fmt = string.join(['%s'] * columns, item_sep)
+        fmt = item_sep.join(['%s'] * columns)
         f.write(nest_prefix)
         f.write(fmt % tuple(set.tolist()))
         f.write(nest_suffix)
@@ -70,7 +83,7 @@ def write_array(f, set,
         # efficiency.
         (points, columns) = set.shape
         assert points > 0 and columns > 0
-        fmt = string.join(['%s'] * columns, item_sep)
+        fmt = item_sep.join(['%s'] * columns)
         f.write(nest_prefix + nest_prefix)
         f.write(fmt % tuple(set[0].tolist()))
         f.write(nest_suffix)

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: gp_macosx.py 291 2006-03-03 08:58:48Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #

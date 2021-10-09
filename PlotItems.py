@@ -1,4 +1,4 @@
-# $Id$
+# $Id: PlotItems.py 299 2007-03-30 12:52:17Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -14,16 +14,10 @@ behavior.
 
 """
 
-import os, string, tempfile, types
-
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
-
+import os, tempfile, types
+from io import StringIO
 import numpy
-
-import gp, utils, Errors
+from . import gp, utils, Errors
 
 
 class _unset:
@@ -87,8 +81,6 @@ class PlotItem:
             'with', with_, None, 'with %s'),
         'title' : lambda self, title: self.set_string_option(
             'title', title, 'notitle', 'title "%s"'),
-        'fs' : lambda self, fs: self.set_string_option(
-            'fs', fs, None, 'fs %s'),
         }
     _option_list['with_'] = _option_list['with']
 
@@ -96,7 +88,7 @@ class PlotItem:
     _option_sequence = [
         'binary',
         'index', 'every', 'thru', 'using', 'smooth',
-        'axes', 'title', 'with', 'fs'
+        'axes', 'title', 'with'
         ]
 
     def __init__(self, **keyw):
@@ -179,7 +171,7 @@ class PlotItem:
             (val,str) = self._options.get(opt, (None,None))
             if str is not None:
                 cmd.append(str)
-        return string.join(cmd)
+        return ''.join(cmd)
 
     def command(self):
         """Build the plot command to be sent to gnuplot.
@@ -190,7 +182,7 @@ class PlotItem:
 
         """
 
-        return string.join([
+        return ''.join([
             self.get_base_command_string(),
             self.get_command_option_string(),
             ])
@@ -322,7 +314,7 @@ class _FileItem(PlotItem):
                     subopts.append(str(subopt))
             self._options[name] = (
                 value,
-                '%s %s' % (name, string.join(subopts, ':'),),
+                '%s %s' % (name, ':'.join(subopts),),
                 )
         else:
             raise Errors.OptionError('%s=%s' % (name, value,))

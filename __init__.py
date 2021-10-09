@@ -1,4 +1,5 @@
-# $Id$
+#! /usr/bin/env python
+# $Id: __init__.py 306 2008-05-02 01:09:02Z alford $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -155,14 +156,19 @@ Bugs:
 
 """
 
-__version__ = '1.8+'
+__version__ = '1.8'
 
 # Other modules that should be loaded for 'from Gnuplot import *':
 __all__ = ['utils', 'funcutils', ]
 
-from gp import GnuplotOpts, GnuplotProcess, test_persist
-from Errors import Error, OptionError, DataError
-from PlotItems import PlotItem, Func, File, Data, GridData
-from _Gnuplot import Gnuplot, Tic
+from .gp import GnuplotOpts, GnuplotProcess, test_persist
+from .Errors import Error, OptionError, DataError
+from .PlotItems import PlotItem, Func, File, Data, GridData
+from ._Gnuplot import Gnuplot
+
+
+if __name__ == '__main__':
+    import demo
+    demo.demo()
 
 

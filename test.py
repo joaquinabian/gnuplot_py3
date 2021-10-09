@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-# $Id$
+# $Id: test.py 302 2008-01-14 22:15:19Z bmcage $
 
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -80,21 +80,6 @@ def main():
         g.plot(Gnuplot.Func('sin(x)', title='Sine of x'))
         wait('axes=x2y2')
         g.plot(Gnuplot.Func('sin(x)', axes='x2y2', title='Sine of x'))
-        wait('Custom tics')
-        g.set_tics(
-            'x',
-            [
-                (-2 * math.pi, '-2pi'),
-                (-math.pi, '', 2),
-                (0,),
-                Gnuplot.Tic(math.pi, level=2),
-                Gnuplot.Tic(2 * math.pi, '2pi'),
-                ],
-            )
-        g.plot(Gnuplot.Func('sin(x)', title='Sine of x'))
-        wait('Reset to default tics')
-        g.set_tics('x', 'auto')
-        g.plot(Gnuplot.Func('sin(x)', title='Sine of x'))
 
         print 'Change Func attributes after construction:'
         f = Gnuplot.Func('sin(x)')

@@ -1,4 +1,6 @@
-# $Id$
+#! /usr/bin/env python
+
+# $Id: funcutils.py 297 2007-03-30 11:25:28Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #

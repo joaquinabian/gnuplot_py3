@@ -1,4 +1,4 @@
-$Id$
+$Id: NEWS.txt 302 2008-01-14 22:15:19Z bmcage $
 
 This file describes the changes introduced in each version of the
 Gnuplot.py package.

@@ -1,4 +1,4 @@
-# $Id$
+# $Id: _Gnuplot.py 305 2008-01-17 20:10:44Z bmcage $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -12,9 +12,9 @@ interface to a running gnuplot process.
 
 """
 
-import sys, string, types
+import sys
 
-import gp, PlotItems, termdefs, Errors
+from . import gp, PlotItems, termdefs, Errors
 
 
 class _GnuplotFile:
@@ -55,35 +55,6 @@ class _GnuplotFile:
 
         self.write(s + '\n')
         self.flush()
-
-
-class Tic:
-    """An explicit ticmark definition.
-
-    An instance of this class defines a tic mark explicitly, a la
-    gnuplot's 'set xtics (...)' command."""
-
-    def __init__(self, position, label=None, level=None):
-        self.position = position
-        if label is None:
-            if level is not None:
-                label = str(position)
-        elif not isinstance(label, basestring):
-            raise TypeError('label must be a string')
-        self.label = label
-        if level is None:
-            self.level = None
-        else:
-            self.level = int(level)
-
-    def __str__(self):
-        retval = []
-        if self.label is not None:
-            retval.append('"%s"' % (self.label,))
-        retval.append(str(self.position))
-        if self.level is not None:
-            retval.append(str(self.level))
-        return ' '.join(retval)
 
 
 class Gnuplot:
@@ -252,7 +223,7 @@ class Gnuplot:
         plotcmds = []
         for item in self.itemlist:
             plotcmds.append(item.command())
-        self(self.plotcmd + ' ' + string.join(plotcmds, ', '))
+        self(self.plotcmd + ' ' + ', '.join(plotcmds))
         for item in self.itemlist:
             # Uses self.gnuplot.write():
             item.pipein(self.gnuplot)
@@ -276,7 +247,7 @@ class Gnuplot:
         for item in items:
             if isinstance(item, PlotItems.PlotItem):
                 self.itemlist.append(item)
-            elif type(item) is types.StringType:
+            elif isinstance(item, str):
                 self.itemlist.append(PlotItems.Func(item))
             else:
                 # assume data is an array:
@@ -436,7 +407,7 @@ class Gnuplot:
             if font is not None:
                 cmd.append('"%s"' % (font,))
 
-        self(string.join(cmd))
+        self(' '.join(cmd))
 
     def set_boolean(self, option, value):
         """Set an on/off option.  It is assumed that the way to turn
@@ -458,7 +429,7 @@ class Gnuplot:
 
         if value is None:
             self('set %s [*:*]' % (option,))
-        elif type(value) is types.StringType:
+        elif isinstance(value, str):
             self('set %s %s' % (option, value,))
         else:
             # Must be a tuple:
@@ -500,39 +471,6 @@ class Gnuplot:
         """Set the plot's title."""
 
         self.set_label('title', s, offset=offset, font=font)
-
-    def set_tics(self, axis, value):
-        """Configure the tics for the given axis.
-
-        axis may be 'x', 'y', 'z', 'x2', or 'y2'.
-
-        value can be a string, in which case it is passed to gnuplot's
-        'set xtics', 'set ytics', etc. command.  Or it can be a list
-        of Tic objects or tuples specifying where each individual
-        tic/label should be placed.  Any list entries that are tuples
-        are passed to the Tic constructor and therefore must be in one
-        of the following forms:
-
-            (pos,)
-            (pos, label)
-            (pos, label, level)
-
-        where pos is the position of the tic mark (as a number), label
-        is a string that will be used to label the tic, and level is 0
-        (for major tics) or 1 (for minor tics).
-
-        """
-
-        if type(value) is types.StringType:
-            tics_string = value
-        else:
-            tics_strings = []
-            for tic in value:
-                if not isinstance(tic, Tic):
-                    tic = Tic(*tic)
-                tics_strings.append(str(tic))
-            tics_string = '(%s)' % (', '.join(tics_strings),)
-	self('set %stics %s' % (axis, tics_string,))
 
     def hardcopy(self, filename=None, terminal='postscript', **keyw):
         """Create a hardcopy of the current plot.
@@ -633,11 +571,11 @@ class Gnuplot:
             # Not all options were consumed.
             raise Errors.OptionError(
                 'The following options are unrecognized: %s'
-                % (string.join(keyw.keys(), ', '),)
-                )
+                % (', '.join(keyw.keys(),)
+                ))
 
         self.set_string('output', filename)
-        self(string.join(setterm))
+        self(''.join(setterm))
         # replot the current figure (to the printer):
         self.refresh()
         # reset the terminal to its `default' setting:

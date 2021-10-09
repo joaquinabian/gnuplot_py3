@@ -1,4 +1,4 @@
-# $Id$
+# $Id: gnuplot_Suites.py 292 2006-03-03 09:49:04Z mhagger $
 
 # This file is provided as part of the Gnuplot.py package for the
 # convenience of Mac users.  It was generated primarily using gensuitemodule

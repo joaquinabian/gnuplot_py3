@@ -1,4 +1,4 @@
-# $Id$
+# $Id: gp_win32.py 292 2006-03-03 09:49:04Z mhagger $
 
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -9,7 +9,7 @@
 
 """
 
-import Errors
+from . import Errors
 
 # ############ Configuration variables: ################################
 
@@ -32,7 +32,7 @@ class GnuplotOpts:
     # quote backslashes in the filename.  Example:
     #
     #     gnuplot_command = r'"C:\Program Files\gp371w32\pgnuplot.exe"'
-    gnuplot_command = r'pgnuplot.exe'
+    gnuplot_command = r'gnuplot.exe'
 
     # The '-persist' option is not supported on windows:
     recognizes_persist = 0

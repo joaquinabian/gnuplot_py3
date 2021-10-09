@@ -1,4 +1,4 @@
-# $Id$
+# $Id: gp_mac.py 292 2006-03-03 09:49:04Z mhagger $
 
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 # Thanks to Tony Ingraldi and Noboru Yamamoto for their contributions.

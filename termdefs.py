@@ -1,4 +1,4 @@
-# $Id$
+# $Id: termdefs.py 302 2008-01-14 22:15:19Z bmcage $
 
 # Copyright (C) 2001-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -29,7 +29,7 @@ keyword arguments and build the 'set terminal' command.
 
 import types
 
-import gp, Errors
+from . import gp, Errors
 
 
 class Arg:
