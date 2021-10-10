@@ -1,5 +1,4 @@
-# $Id: gp_win32.py 292 2006-03-03 09:49:04Z mhagger $
-
+#
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License
@@ -9,7 +8,7 @@
 
 """
 
-from . import Errors
+from gnuplot import Errors
 
 # ############ Configuration variables: ################################
 
