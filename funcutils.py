@@ -1,6 +1,5 @@
 #! /usr/bin/env python
 
-# $Id: funcutils.py 297 2007-03-30 11:25:28Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -15,8 +14,7 @@ points and tabulate the output to be used with Gnuplot.
 """
 
 import numpy
-
-import Gnuplot, utils
+import gnuplot, utils
 
 
 def tabulate_function(f, xvals, yvals=None, dtype=None, ufunc=0):
@@ -129,7 +127,7 @@ def compute_Data(xvals, f, ufunc=0, **keyw):
     # evaluate function:
     data = tabulate_function(f, xvals, ufunc=ufunc)
 
-    return Gnuplot.Data(xvals, data, **keyw)
+    return gnuplot.Data(xvals, data, **keyw)
 
 
 def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
@@ -175,11 +173,10 @@ def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
     # evaluate function:
     data = tabulate_function(f, xvals, yvals, ufunc=ufunc)
 
-    return Gnuplot.GridData(data, xvals, yvals, **keyw)
+    return gnuplot.GridData(data, xvals, yvals, **keyw)
 
 
 # For backwards compatibility:
 def GridFunc(f, xvals, yvals, **keyw):
     return compute_GridData(xvals, yvals, f, **keyw)
-
 

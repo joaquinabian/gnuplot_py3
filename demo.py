@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# $Id: demo.py 299 2007-03-30 12:52:17Z mhagger $
 
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -16,7 +15,7 @@ the Gnuplot package, see test.py.
 from numpy import *
 
 # If the package has been installed correctly, this should work:
-import Gnuplot, Gnuplot.funcutils
+import gnuplot, gnuplot.funcutils
 
 
 def demo():
@@ -25,13 +24,13 @@ def demo():
     # A straightforward use of gnuplot.  The `debug=1' switch is used
     # in these examples so that the commands that are sent to gnuplot
     # are also output on stderr.
-    g = Gnuplot.Gnuplot(debug=1)
+    g = gnuplot.Gnuplot(debug=1)
     g.title('A simple example') # (optional)
-    g('set data style linespoints') # give gnuplot an arbitrary command
+    g('set style data linespoints') # give gnuplot an arbitrary command
     # Plot a list of (x, y) pairs (tuples or a numpy array would
     # also be OK):
     g.plot([[0,1.1], [1,5.8], [2,3.3], [3,4.2]])
-    raw_input('Please press return to continue...\n')
+    input('Please press return to continue...\n')
 
     g.reset()
     # Plot one dataset from an array and one via a gnuplot function;
@@ -42,15 +41,15 @@ def demo():
     # is convenient if the same dataset has to be plotted multiple
     # times.  It is also more efficient because the data need only be
     # written to a temporary file once.
-    d = Gnuplot.Data(x, y1,
+    d = gnuplot.Data(x, y1,
                      title='calculated by python',
-                     with_='points 3 3')
+                     with_='points lt 3 pt 3')
     g.title('Data can be computed by python or gnuplot')
     g.xlabel('x')
     g.ylabel('x squared')
     # Plot a function alongside the Data PlotItem defined above:
-    g.plot(Gnuplot.Func('x**2', title='calculated by gnuplot'), d)
-    raw_input('Please press return to continue...\n')
+    g.plot(gnuplot.Func('x**2', title='calculated by gnuplot'), d)
+    input('Please press return to continue...\n')
 
     # Save what we just plotted as a color postscript file.
 
@@ -61,7 +60,7 @@ def demo():
     g.ylabel('x^2') # take advantage of enhanced postscript mode
     g.hardcopy('gp_test.ps', enhanced=1, color=1)
     print ('\n******** Saved plot to postscript file "gp_test.ps" ********\n')
-    raw_input('Please press return to continue...\n')
+    input('Please press return to continue...\n')
 
     g.reset()
     # Demonstrate a 3-d plot:
@@ -75,7 +74,7 @@ def demo():
     ym = y[newaxis,:]
     m = (sin(xm) + 0.1*xm) - ym**2
     g('set parametric')
-    g('set data style lines')
+    g('set style data lines')
     g('set hidden')
     g('set contour base')
     g.title('An example of a surface plot')
@@ -88,16 +87,16 @@ def demo():
     # disable binary because older versions of gnuplot don't allow
     # binary data.  Change this to `binary=1' (or omit the binary
     # option) to get the advantage of binary format.
-    g.splot(Gnuplot.GridData(m,x,y, binary=0))
-    raw_input('Please press return to continue...\n')
+    g.splot(gnuplot.GridData(m,x,y, binary=0))
+    input('Please press return to continue...\n')
 
     # plot another function, but letting GridFunc tabulate its values
     # automatically.  f could also be a lambda or a global function:
     def f(x,y):
         return 1.0 / (1 + 0.01 * x**2 + 0.5 * y**2)
 
-    g.splot(Gnuplot.funcutils.compute_GridData(x,y, f, binary=0))
-    raw_input('Please press return to continue...\n')
+    g.splot(gnuplot.funcutils.compute_GridData(x,y, f, binary=0))
+    input('Please press return to continue...\n')
 
     # Explicit delete shouldn't be necessary, but if you are having
     # trouble with temporary files being left behind, try uncommenting

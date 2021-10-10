@@ -14,7 +14,7 @@ behavior.
 
 """
 
-import os, tempfile, types
+import os, tempfile
 from io import StringIO
 import numpy
 from . import gp, utils, Errors
@@ -149,7 +149,7 @@ class PlotItem:
 
         if value is None:
             self._options[option] = (value, default)
-        elif type(value) is types.StringType:
+        elif isinstance(value, str):
             self._options[option] = (value, fmt % value)
         else:
             Errors.OptionError('%s=%s' % (option, value,))
@@ -168,10 +168,10 @@ class PlotItem:
     def get_command_option_string(self):
         cmd = []
         for opt in self._option_sequence:
-            (val,str) = self._options.get(opt, (None,None))
-            if str is not None:
-                cmd.append(str)
-        return ''.join(cmd)
+            (val, strg) = self._options.get(opt, (None,None))
+            if strg is not None:
+                cmd.append(strg)
+        return ' '.join(cmd)
 
     def command(self):
         """Build the plot command to be sent to gnuplot.
@@ -182,7 +182,7 @@ class PlotItem:
 
         """
 
-        return ''.join([
+        return ' '.join([
             self.get_base_command_string(),
             self.get_command_option_string(),
             ])
@@ -303,9 +303,9 @@ class _FileItem(PlotItem):
     def set_option_colonsep(self, name, value):
         if value is None:
             self.clear_option(name)
-        elif type(value) in [types.StringType, types.IntType]:
+        elif isinstance(value, (str, int)):
             self._options[name] = (value, '%s %s' % (name, value,))
-        elif type(value) is types.TupleType:
+        elif isinstance(value, tuple):
             subopts = []
             for subopt in value:
                 if subopt is None:
@@ -492,7 +492,7 @@ def File(filename, **keyw):
 
     """
 
-    if type(filename) is not types.StringType:
+    if not isinstance(filename, str):
         raise Errors.OptionError(
             'Argument (%s) must be a filename' % (filename,)
             )
@@ -558,7 +558,7 @@ def Data(*data, **keyw):
     if 'cols' in keyw:
         cols = keyw['cols']
         del keyw['cols']
-        if isinstance(cols, types.IntType):
+        if isinstance(cols, int):
             cols = (cols,)
         data = numpy.take(data, cols, -1)
 
@@ -721,7 +721,7 @@ def GridData(
         # output data to file as "x y f(x)" triplets.  This
         # requires numy copies of each x value and numx copies of
         # each y value.  First reformat the data:
-        set = numpy.transpose(
+        aset = numpy.transpose(
             numpy.array(
                 (numpy.transpose(numpy.resize(xvals, (numy, numx))),
                  numpy.resize(yvals, (numx, numy)),
@@ -731,7 +731,7 @@ def GridData(
         # produce data properly formatted in blocks separated by blank
         # lines so that gnuplot can connect the points into a grid.
         f = StringIO()
-        utils.write_array(f, set)
+        utils.write_array(f, aset)
         content = f.getvalue()
 
         if inline:
@@ -742,5 +742,3 @@ def GridData(
             return _FIFOFileItem(content, **keyw)
         else:
             return _NewFileItem(content, **keyw)
-
-

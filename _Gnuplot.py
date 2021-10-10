@@ -1,5 +1,3 @@
-# $Id: _Gnuplot.py 305 2008-01-17 20:10:44Z bmcage $
-
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License
@@ -563,10 +561,19 @@ class Gnuplot:
             raise Errors.OptionError(
                 'Terminal "%s" is not configured in Gnuplot.py.' % (terminal,))
 
+        commands = []
         for opt in opts:
             cmd = opt(keyw)
             if cmd is not None:
-                setterm.extend(cmd)
+                commands.extend(cmd)
+
+        # for postscript, 'default' is not compatible with any other option
+        # however 'enhanced' is set always
+        if (terminal=='postscript') and ('default' in commands):
+            setterm.append('default')
+        else:
+            setterm.extend(commands)
+
         if keyw:
             # Not all options were consumed.
             raise Errors.OptionError(
@@ -575,11 +582,10 @@ class Gnuplot:
                 ))
 
         self.set_string('output', filename)
-        self(''.join(setterm))
+        self(' '.join(setterm))
         # replot the current figure (to the printer):
         self.refresh()
         # reset the terminal to its `default' setting:
         self('set terminal %s' % gp.GnuplotOpts.default_term)
         self.set_string('output')
-
 

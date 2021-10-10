@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# $Id: __init__.py 306 2008-05-02 01:09:02Z alford $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
@@ -137,7 +136,7 @@ Restrictions:
     commands to gnuplot manually::
 
         g = Gnuplot.Gnuplot()
-        g('set data style linespoints')
+        g('set style data linespoints')
         g('set pointsize 5')
 
  -  There is no provision for missing data points in array data (which
