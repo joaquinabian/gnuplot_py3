@@ -55,7 +55,7 @@ class GnuplotOpts:
 # The Macintosh doesn't support pipes so communication is via
 # AppleEvents.
 
-import gnuplot_Suites
+import gnuplot_suites
 import Required_Suite
 import aetools
 
@@ -65,12 +65,12 @@ def test_persist():
     return 0
 
 
-class _GNUPLOT(aetools.TalkTo,
+class _Gnuplot(aetools.TalkTo,
                Required_Suite.Required_Suite,
-               gnuplot_Suites.gnuplot_Suite,
-               gnuplot_Suites.odds_and_ends,
-               gnuplot_Suites.Standard_Suite,
-               gnuplot_Suites.Miscellaneous_Events):
+               gnuplot_suites.GnuplotSuite,
+               gnuplot_suites.odds_and_ends,
+               gnuplot_suites.Standard_Suite,
+               gnuplot_suites.Miscellaneous_Events):
     """Start a gnuplot program and emulate a pipe to it."""
 
     def __init__(self):
@@ -101,7 +101,7 @@ class GnuplotProcess:
             raise Errors.OptionError(
                 '-persist is not supported on the Macintosh!')
 
-        self.gnuplot = _GNUPLOT()
+        self.gnuplot = _Gnuplot()
 
     def close(self):
         if self.gnuplot is not None:
