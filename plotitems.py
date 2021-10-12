@@ -74,11 +74,11 @@ class PlotItem:
 
     # For _option_list explanation, see docstring for PlotItem.
     _option_list = {
-        'axes' : lambda self, axes: self.set_string_option(
+        'axes': lambda self, axes: self.set_string_option(
             'axes', axes, None, 'axes %s'),
-        'with' : lambda self, with_: self.set_string_option(
+        'with': lambda self, with_: self.set_string_option(
             'with', with_, None, 'with %s'),
-        'title' : lambda self, title: self.set_string_option(
+        'title': lambda self, title: self.set_string_option(
             'title', title, 'notitle', 'title "%s"'),
         }
     _option_list['with_'] = _option_list['with']
@@ -136,7 +136,7 @@ class PlotItem:
             try:
                 setter = self._option_list[option]
             except KeyError:
-                raise Errors.OptionError('%s=%s' % (option,value))
+                raise Errors.OptionError('%s=%s' % (option, value))
             if setter is None:
                 raise Errors.OptionError(
                     'Cannot modify %s option after construction!', option)
@@ -167,7 +167,7 @@ class PlotItem:
     def get_command_option_string(self):
         cmd = []
         for opt in self._option_sequence:
-            (val, strg) = self._options.get(opt, (None,None))
+            (val, strg) = self._options.get(opt, (None, None))
             if strg is not None:
                 cmd.append(strg)
         return ' '.join(cmd)
@@ -236,11 +236,11 @@ class _FileItem(PlotItem):
 
     _option_list = PlotItem._option_list.copy()
     _option_list.update({
-        'binary' : lambda self, binary: self.set_option_binary(binary),
-        'index' : lambda self, value: self.set_option_colonsep('index', value),
-        'every' : lambda self, value: self.set_option_colonsep('every', value),
-        'using' : lambda self, value: self.set_option_colonsep('using', value),
-        'smooth' : lambda self, smooth: self.set_string_option(
+        'binary': lambda self, binary: self.set_option_binary(binary),
+        'index': lambda self, value: self.set_option_colonsep('index', value),
+        'every': lambda self, value: self.set_option_colonsep('every', value),
+        'using': lambda self, value: self.set_option_colonsep('using', value),
+        'smooth': lambda self, smooth: self.set_string_option(
             'smooth', smooth, None, 'smooth %s'
             ),
         })
@@ -545,7 +545,7 @@ def Data(*data, **keyw):
         # treated as one value per point (by default, plotted against
         # its index):
         if len(data.shape) == 1:
-            data = data[:,numpy.newaxis]
+            data = data[:, numpy.newaxis]
     else:
         # data was passed column by column (for example,
         # Data(x,y)); pack it into one big array (this will test
@@ -591,9 +591,8 @@ def Data(*data, **keyw):
         return _NewFileItem(content, **keyw)
 
 
-def GridData(
-    data, xvals=None, yvals=None, inline=_unset, filename=None, **keyw
-    ):
+def GridData(data, xvals=None, yvals=None,
+             inline=_unset, filename=None, **keyw):
     """Return a _FileItem representing a function of two variables.
 
     'GridData' represents a function that has been tabulated on a
@@ -700,16 +699,16 @@ def GridData(
         # the documentation and go with the code.
 
         mout = numpy.zeros((numy + 1, numx + 1), numpy.float32)
-        mout[0,0] = numx
-        mout[0,1:] = xvals.astype(numpy.float32)
-        mout[1:,0] = yvals.astype(numpy.float32)
+        mout[0, 0] = numx
+        mout[0, 1:] = xvals.astype(numpy.float32)
+        mout[1:, 0] = yvals.astype(numpy.float32)
         try:
             # try copying without the additional copy implied by astype():
-            mout[1:,1:] = numpy.transpose(data)
+            mout[1:, 1:] = numpy.transpose(data)
         except:
             # if that didn't work then downcasting from double
             # must be necessary:
-            mout[1:,1:] = numpy.transpose(data.astype(numpy.float32))
+            mout[1:, 1:] = numpy.transpose(data.astype(numpy.float32))
 
         content = mout.tostring()
         if (not filename) and gp.GnuplotOpts.prefer_fifo_data:
@@ -724,7 +723,7 @@ def GridData(
             numpy.array(
                 (numpy.transpose(numpy.resize(xvals, (numy, numx))),
                  numpy.resize(yvals, (numx, numy)),
-                 data)), (1,2,0))
+                 data)), (1, 2, 0))
 
         # Now output the data with the usual routine.  This will
         # produce data properly formatted in blocks separated by blank
