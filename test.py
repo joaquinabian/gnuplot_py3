@@ -18,13 +18,13 @@ import os, time, math, tempfile
 import numpy
 
 try:
-    import gnuplot, gnuplot.PlotItems, gnuplot.funcutils
+    import gnuplot, gnuplot.plotitems, gnuplot.funcutils
 except ImportError:
     # kludge in case Gnuplot hasn't been installed as a module yet:
     import __init__
     gnuplot = __init__
-    import PlotItems
-    gnuplot.PlotItems = PlotItems
+    import plotitems
+    gnuplot.plotitems = plotitems
     import funcutils
     gnuplot.funcutils = funcutils
 

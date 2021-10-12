@@ -29,7 +29,7 @@ For information about how to use this module:
 
 3. For more details see the extensive documentation strings
    throughout the python source files, especially this file,
-   _gnuplot.py, PlotItems.py, and gp_unix.py.
+   _gnuplot.py, plotitems.py, and gp_unix.py.
 
 4. The docstrings have also been turned into html which can be read
    "here", http://gnuplot-py.sourceforge.net/doc.  However, the
@@ -162,7 +162,7 @@ __all__ = ['utils', 'funcutils', ]
 
 from .gp import GnuplotOpts, GnuplotProcess, test_persist
 from .Errors import Error, OptionError, DataError
-from .PlotItems import PlotItem, Func, File, Data, GridData
+from .plotitems import PlotItem, Func, File, Data, GridData
 from ._gnuplot import Gnuplot
 
 

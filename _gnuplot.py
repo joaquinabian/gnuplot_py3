@@ -12,7 +12,7 @@ interface to a running gnuplot process.
 
 import sys
 
-from . import gp, PlotItems, termdefs, Errors
+from . import gp, plotitems, termdefs, Errors
 
 
 class _GnuplotFile:
@@ -243,13 +243,13 @@ class Gnuplot:
         """
 
         for item in items:
-            if isinstance(item, PlotItems.PlotItem):
+            if isinstance(item, plotitems.PlotItem):
                 self.itemlist.append(item)
             elif isinstance(item, str):
-                self.itemlist.append(PlotItems.Func(item))
+                self.itemlist.append(plotitems.Func(item))
             else:
                 # assume data is an array:
-                self.itemlist.append(PlotItems.Data(item))
+                self.itemlist.append(plotitems.Data(item))
 
     def plot(self, *items, **keyw):
         """Draw a new plot.

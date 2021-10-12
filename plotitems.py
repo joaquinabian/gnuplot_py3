@@ -1,11 +1,11 @@
-# $Id: PlotItems.py 299 2007-03-30 12:52:17Z mhagger $
+# $Id: plotitems.py 299 2007-03-30 12:52:17Z mhagger $
 
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License
 # (LGPL).  See LICENSE.txt for details.
 
-"""PlotItems.py -- Objects that can be plotted by Gnuplot.
+"""plotitems.py -- Objects that can be plotted by Gnuplot.
 
 This module contains several types of PlotItems.  PlotItems can be
 plotted by passing them to a Gnuplot.Gnuplot object.  You can derive
