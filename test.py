@@ -28,9 +28,9 @@ except ImportError:
     gnuplot.funcutils = funcutils
 
 
-def wait(str=None, prompt='Press return to show results...\n'):
-    if str is not None:
-        print(str)
+def wait(msg=None, prompt='Press return to show results...\n'):
+    if msg:
+        print(msg)
     input(prompt)
 
 
