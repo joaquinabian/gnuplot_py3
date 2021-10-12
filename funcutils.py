@@ -174,8 +174,3 @@ def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
     data = tabulate_function(f, xvals, yvals, ufunc=ufunc)
 
     return gnuplot.GridData(data, xvals, yvals, **keyw)
-
-
-# For backwards compatibility:
-def GridFunc(f, xvals, yvals, **keyw):
-    return compute_GridData(xvals, yvals, f, **keyw)
