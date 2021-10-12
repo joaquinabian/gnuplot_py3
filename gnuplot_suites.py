@@ -1,4 +1,3 @@
-
 # This file is provided as part of the Gnuplot.py package for the
 # convenience of Mac users.  It was generated primarily using gensuitemodule
 # with Mac gnuplot 3.7.1a.  Thanks to Anthony M. Ingraldi and Noboru Yamamoto
@@ -23,6 +22,7 @@ import MacOS
 
 _code = 'GPSE'
 
+
 class GnuplotSuite:
 
     def gnuexec(self, _object=None, _attributes={}, **_arguments):
@@ -33,16 +33,16 @@ class GnuplotSuite:
         _code = 'GPSE'
         _subcode = 'exec'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments: 
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def plot(self, _object=None, _attributes={}, **_arguments):
@@ -55,16 +55,16 @@ class GnuplotSuite:
         _code = 'GPLT'
         _subcode = 'plot'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments: 
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def splot(self, _object=None, _attributes={}, **_arguments):
@@ -75,68 +75,70 @@ class GnuplotSuite:
         _code = 'GPLT'
         _subcode = 'splt'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
 
 class graph(aetools.ComponentItem):
     """graph - graph - a subclass of window"""
     want = 'cGRF'
+
+
 class picture(aetools.NProperty):
     """picture - gnuplot graph in "PICT" format"""
     which = 'PICT'
     want = 'PICT'
+
+
 graph._propdict = {
-    'picture' : picture,
+    'picture': picture,
 }
 graph._elemdict = {
 }
 _Enum_lyty = {
-    'line' : 'typ1',    # line
-    'points' : 'typ2',  # points
-    'impulses' : 'typ3',    # impulses
-    'linespoints' : 'typ4', # linespoints
-    'dots' : 'typ5',    # dots
-    'steps' : 'typ6',   # steps
-    'fsteps' : 'typ7',  # fsteps
-    'errorbars' : 'typ8',   # errorbars
-    'xerrorbars' : 'typ9',  # xerrorbars
-    'yerrorbars' : 'ty10',  # yerrorbars
-    'xyerrorbars' : 'ty11', # xyerrorbars
-    'boxes' : 'ty12',   # boxes
-    'boxerrorbars' : 'ty13',    # boxerrorbars
-    'boxxyerrorbars' : 'ty14',  # boxxyerrorbars
-    'vector' : 'ty19',  # vector
+    'line': 'typ1',  # line
+    'points': 'typ2',  # points
+    'impulses': 'typ3',  # impulses
+    'linespoints': 'typ4',  # linespoints
+    'dots': 'typ5',  # dots
+    'steps': 'typ6',  # steps
+    'fsteps': 'typ7',  # fsteps
+    'errorbars': 'typ8',  # errorbars
+    'xerrorbars': 'typ9',  # xerrorbars
+    'yerrorbars': 'ty10',  # yerrorbars
+    'xyerrorbars': 'ty11',  # xyerrorbars
+    'boxes': 'ty12',  # boxes
+    'boxerrorbars': 'ty13',  # boxerrorbars
+    'boxxyerrorbars': 'ty14',  # boxxyerrorbars
+    'vector': 'ty19',  # vector
 }
-
 
 #
 # Indices of types declared in this module
 #
 _classdeclarations = {
-    'cGRF' : graph,
+    'cGRF': graph,
 }
 
 _propdeclarations = {
-    'PICT' : picture,
+    'PICT': picture,
 }
 
 _compdeclarations = {
 }
 
 _enumdeclarations = {
-    'lyty' : _Enum_lyty,
+    'lyty': _Enum_lyty,
 }
-
 
 """Suite odds and ends: Things that should be in some standard suite, but aren�t
 Level 1, version 1
@@ -150,6 +152,7 @@ import MacOS
 
 _code = 'Odds'
 
+
 class odds_and_ends:
 
     def select(self, _object=None, _attributes={}, **_arguments):
@@ -160,16 +163,16 @@ class odds_and_ends:
         _code = 'misc'
         _subcode = 'slct'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments: 
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
 
@@ -200,11 +203,11 @@ import MacOS
 
 _code = 'CoRe'
 
-class Standard_Suite:
 
+class Standard_Suite:
     _argmap_close = {
-        'saving' : 'savo',
-        '_in' : 'kfil',
+        'saving': 'savo',
+        '_in': 'kfil',
     }
 
     def close(self, _object, _attributes={}, **_arguments):
@@ -223,11 +226,11 @@ class Standard_Suite:
         aetools.enumsubst(_arguments, 'savo', _Enum_savo)
 
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def data_size(self, _object, _attributes={}, **_arguments):
@@ -239,16 +242,16 @@ class Standard_Suite:
         _code = 'core'
         _subcode = 'dsiz'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def get(self, _object, _attributes={}, **_arguments):
@@ -260,23 +263,23 @@ class Standard_Suite:
         _code = 'core'
         _subcode = 'getd'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     _argmap_make = {
-        'new' : 'kocl',
-        'at' : 'insh',
-        'with_data' : 'data',
-        'with_properties' : 'prdt',
+        'new': 'kocl',
+        'at': 'insh',
+        'with_data': 'data',
+        'with_properties': 'prdt',
     }
 
     def make(self, _no_object=None, _attributes={}, **_arguments):
@@ -292,15 +295,15 @@ class Standard_Suite:
         _subcode = 'crel'
 
         aetools.keysubst(_arguments, self._argmap_make)
-        if _no_object != None: raise TypeError('No direct arg expected')
-
+        if _no_object is not None:
+            raise TypeError('No direct arg expected')
 
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def open(self, _object, _attributes={}, **_arguments):
@@ -311,16 +314,16 @@ class Standard_Suite:
         _code = 'aevt'
         _subcode = 'odoc'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def _print(self, _object, _attributes={}, **_arguments):
@@ -331,21 +334,21 @@ class Standard_Suite:
         _code = 'aevt'
         _subcode = 'pdoc'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     _argmap_save = {
-        '_in' : 'kfil',
-        'as' : 'fltp',
+        '_in': 'kfil',
+        'as': 'fltp',
     }
 
     def save(self, _object, _attributes={}, **_arguments):
@@ -361,17 +364,16 @@ class Standard_Suite:
         aetools.keysubst(_arguments, self._argmap_save)
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     _argmap_set = {
-        'to' : 'data',
+        'to': 'data',
     }
 
     def set(self, _object, _attributes={}, **_arguments):
@@ -386,147 +388,176 @@ class Standard_Suite:
         aetools.keysubst(_arguments, self._argmap_set)
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
 
 class application(aetools.ComponentItem):
     """application - An application program"""
     want = 'capp'
+
+
 #        element 'cwin' as ['indx', 'name', 'rele']
 #        element 'docu' as ['name']
 
 class window(aetools.ComponentItem):
     """window - A Window"""
     want = 'cwin'
+
+
 class bounds(aetools.NProperty):
     """bounds - the boundary rectangle for the window"""
     which = 'pbnd'
     want = 'qdrt'
+
+
 class closeable(aetools.NProperty):
     """closeable - Does the window have a close box?"""
     which = 'hclb'
     want = 'bool'
+
+
 class titled(aetools.NProperty):
     """titled - Does the window have a title bar?"""
     which = 'ptit'
     want = 'bool'
+
+
 class index(aetools.NProperty):
     """index - the number of the window"""
     which = 'pidx'
     want = 'long'
+
+
 class floating(aetools.NProperty):
     """floating - Does the window float?"""
     which = 'isfl'
     want = 'bool'
+
+
 class modal(aetools.NProperty):
     """modal - Is the window modal?"""
     which = 'pmod'
     want = 'bool'
+
+
 class resizable(aetools.NProperty):
     """resizable - Is the window resizable?"""
     which = 'prsz'
     want = 'bool'
+
+
 class zoomable(aetools.NProperty):
     """zoomable - Is the window zoomable?"""
     which = 'iszm'
     want = 'bool'
+
+
 class zoomed(aetools.NProperty):
     """zoomed - Is the window zoomed?"""
     which = 'pzum'
     want = 'bool'
+
+
 class name(aetools.NProperty):
     """name - the title of the window"""
     which = 'pnam'
     want = 'itxt'
+
+
 class visible(aetools.NProperty):
     """visible - is the window visible?"""
     which = 'pvis'
     want = 'bool'
+
+
 class position(aetools.NProperty):
     """position - upper left coordinates of window"""
     which = 'ppos'
     want = 'QDpt'
 
+
 class document(aetools.ComponentItem):
     """document - A Document"""
     want = 'docu'
+
+
 # repeated property name the title of the document
 class modified(aetools.NProperty):
     """modified - Has the document been modified since the last save?"""
     which = 'imod'
     want = 'bool'
+
+
 application._propdict = {
 }
 application._elemdict = {
-    'window' : window,
-    'document' : document,
+    'window': window,
+    'document': document,
 }
 window._propdict = {
-    'bounds' : bounds,
-    'closeable' : closeable,
-    'titled' : titled,
-    'index' : index,
-    'floating' : floating,
-    'modal' : modal,
-    'resizable' : resizable,
-    'zoomable' : zoomable,
-    'zoomed' : zoomed,
-    'name' : name,
-    'visible' : visible,
-    'position' : position,
+    'bounds': bounds,
+    'closeable': closeable,
+    'titled': titled,
+    'index': index,
+    'floating': floating,
+    'modal': modal,
+    'resizable': resizable,
+    'zoomable': zoomable,
+    'zoomed': zoomed,
+    'name': name,
+    'visible': visible,
+    'position': position,
 }
 window._elemdict = {
 }
 document._propdict = {
-    'name' : name,
-    'modified' : modified,
+    'name': name,
+    'modified': modified,
 }
 document._elemdict = {
 }
 _Enum_savo = {
-    'yes' : 'yes ', # Save objects now
-    'no' : 'no  ',  # Do not save objects
-    'ask' : 'ask ', # Ask the user whether to save
+    'yes': 'yes ',  # Save objects now
+    'no': 'no  ',  # Do not save objects
+    'ask': 'ask ',  # Ask the user whether to save
 }
-
 
 #
 # Indices of types declared in this module
 #
 _classdeclarations = {
-    'cwin' : window,
-    'docu' : document,
-    'capp' : application,
+    'cwin': window,
+    'docu': document,
+    'capp': application,
 }
 
 _propdeclarations = {
-    'ptit' : titled,
-    'pidx' : index,
-    'ppos' : position,
-    'pnam' : name,
-    'pbnd' : bounds,
-    'imod' : modified,
-    'isfl' : floating,
-    'hclb' : closeable,
-    'iszm' : zoomable,
-    'pmod' : modal,
-    'pzum' : zoomed,
-    'pvis' : visible,
-    'prsz' : resizable,
+    'ptit': titled,
+    'pidx': index,
+    'ppos': position,
+    'pnam': name,
+    'pbnd': bounds,
+    'imod': modified,
+    'isfl': floating,
+    'hclb': closeable,
+    'iszm': zoomable,
+    'pmod': modal,
+    'pzum': zoomed,
+    'pvis': visible,
+    'prsz': resizable,
 }
 
 _compdeclarations = {
 }
 
 _enumdeclarations = {
-    'savo' : _Enum_savo,
+    'savo': _Enum_savo,
 }
 
 """Suite Miscellaneous Events: Useful events that aren�t in any other suite
@@ -541,6 +572,7 @@ import MacOS
 
 _code = 'misc'
 
+
 class Miscellaneous_Events:
 
     def revert(self, _object, _attributes={}, **_arguments):
@@ -551,16 +583,16 @@ class Miscellaneous_Events:
         _code = 'misc'
         _subcode = 'rvrt'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
     def do_script(self, _object=None, _attributes={}, **_arguments):
@@ -571,16 +603,16 @@ class Miscellaneous_Events:
         _code = 'misc'
         _subcode = 'dosc'
 
-        if _arguments: raise TypeError('No optional args expected')
+        if _arguments:
+            raise TypeError('No optional args expected')
         _arguments['----'] = _object
 
-
         _reply, _arguments, _attributes = self.send(_code, _subcode,
-                _arguments, _attributes)
-        if _arguments.has_key('errn'):
+                                                    _arguments, _attributes)
+        if 'errn' in _arguments:
             raise aetools.Error(aetools.decodeerror(_arguments))
         # XXXX Optionally decode result
-        if _arguments.has_key('----'):
+        if '----' in _arguments:
             return _arguments['----']
 
 
