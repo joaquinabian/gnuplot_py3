@@ -38,7 +38,7 @@ def wait(msg=None, prompt='Press return to show results...\n'):
 def main():
     """Exercise the Gnuplot module."""
 
-    print (
+    print(
         'This program exercises many of the features of gnuplot_py3.  The\n'
         'commands that are actually sent to gnuplot are printed for your\n'
         'enjoyment.'
@@ -50,9 +50,9 @@ def main():
 
     # Make two temporary files:
     if hasattr(tempfile, 'mkstemp'):
-        (fd, filename1,) = tempfile.mkstemp(text=1)
+        (fd, filename1,) = tempfile.mkstemp(text=True)
         f = os.fdopen(fd, 'w')
-        (fd, filename2,) = tempfile.mkstemp(text=1)
+        (fd, filename2,) = tempfile.mkstemp(text=True)
     else:
         filename1 = tempfile.mktemp()
         f = open(filename1, 'w')
@@ -117,7 +117,7 @@ def main():
                gnuplot.File(filename1, using=(1,), with_='points'))
         
         wait('using=(1,2), using="1:3"')
-        g.plot(gnuplot.File(filename1, using=(1,2)),
+        g.plot(gnuplot.File(filename1, using=(1, 2)),
                gnuplot.File(filename1, using='1:3'))
 
         wait('every=5, every=(5,)')
@@ -143,7 +143,7 @@ def main():
         f.set_option(with_='linespoints')
         g.plot(f)
         wait('using=(1,3)')
-        f.set_option(using=(1,3))
+        f.set_option(using=(1, 3))
         g.plot(f)
         wait('title=None')
         f.set_option(title=None)
@@ -159,14 +159,14 @@ def main():
         g.plot(gnuplot.Data(y2, inline=0))
 
         wait('Plot Data, specified column-by-column')
-        g.plot(gnuplot.Data(x,y2, inline=0))
+        g.plot(gnuplot.Data(x, y2, inline=0))
 
         wait('Same thing, saved to a file')
-        gnuplot.Data(x,y2, inline=0, filename=filename1)
+        gnuplot.Data(x, y2, inline=0, filename=filename1)
         g.plot(gnuplot.File(filename1))
 
         wait('Same thing, inline data')
-        g.plot(gnuplot.Data(x,y2, inline=1))
+        g.plot(gnuplot.Data(x, y2, inline=1))
 
         wait('Plot Data, specified by an array')
         g.plot(gnuplot.Data(d, inline=0))
@@ -184,17 +184,17 @@ def main():
         g.plot(gnuplot.Data(d, cols=0))
 
         wait('cols=(0,1), cols=(0,2)')
-        g.plot(gnuplot.Data(d, cols=(0,1), inline=0),
-               gnuplot.Data(d, cols=(0,2), inline=0))
+        g.plot(gnuplot.Data(d, cols=(0, 1), inline=0),
+               gnuplot.Data(d, cols=(0, 2), inline=0))
 
         wait('Same thing, saved to files')
-        gnuplot.Data(d, cols=(0,1), inline=0, filename=filename1)
-        gnuplot.Data(d, cols=(0,2), inline=0, filename=filename2)
+        gnuplot.Data(d, cols=(0, 1), inline=0, filename=filename1)
+        gnuplot.Data(d, cols=(0, 2), inline=0, filename=filename2)
         g.plot(gnuplot.File(filename1), gnuplot.File(filename2))
 
         wait('Same thing, inline data')
-        g.plot(gnuplot.Data(d, cols=(0,1), inline=1),
-               gnuplot.Data(d, cols=(0,2), inline=1))
+        g.plot(gnuplot.Data(d, cols=(0, 1), inline=1),
+               gnuplot.Data(d, cols=(0, 2), inline=1))
 
         wait('Change title and replot()')
         g.title('New title')
@@ -229,7 +229,7 @@ def main():
         print('############### test hardcopy ###############################')
         print('******** Generating postscript file "gp_test.ps" ********')
         g.plot(gnuplot.Func('cos(0.5*x*x)', with_='linespoints lt 2 lw 2',
-                       title='cos(0.5*x^2)'))
+                            title='cos(0.5*x^2)'))
         g.hardcopy('gp_test.ps')
 
         wait('Testing hardcopy options: mode="eps"')
@@ -281,12 +281,11 @@ def main():
         print('******** Generating svg file "gp_test.svg" ********')
         wait()
         g.plot(gnuplot.Func('cos(0.5*x*x)', with_='linespoints lt 2 lw 2',
-                       title='cos(0.5*x^2)'))
+                            title='cos(0.5*x^2)'))
         g.hardcopy('gp_test.svg', terminal='svg')
 
         wait('Testing hardcopy svg options: enhanced')
         g.hardcopy('gp_test.ps', terminal='svg', enhanced='1')
-
 
         print('############### test shortcuts ##############################')
         wait('plot Func and Data using shortcuts')
@@ -325,38 +324,38 @@ def main():
         g.splot(data)
 
         wait('Same thing, saved to a file')
-        gnuplot.GridData(m,x,y, binary=0, inline=0, filename=filename1)
+        gnuplot.GridData(m, x, y, binary=0, inline=0, filename=filename1)
         g.splot(gnuplot.File(filename1, binary=0))
 
         wait('Same thing, inline data')
-        g.splot(gnuplot.GridData(m,x,y, binary=0, inline=1))
+        g.splot(gnuplot.GridData(m, x, y, binary=0, inline=1))
 
         wait('The same thing using binary mode')
-        g.splot(gnuplot.GridData(m,x,y, binary=1))
+        g.splot(gnuplot.GridData(m, x, y, binary=1))
 
         wait('Same thing, using binary mode and an intermediate file')
-        gnuplot.GridData(m,x,y, binary=1, filename=filename1)
+        gnuplot.GridData(m, x, y, binary=1, filename=filename1)
         g.splot(gnuplot.File(filename1, binary=1))
 
         wait('The same thing using compute_GridData to tabulate function')
         g.splot(gnuplot.funcutils.compute_GridData(
-            x,y, lambda x,y: math.sin(x) + 0.1*x - y**2,
+            x, y, lambda x, y: math.sin(x) + 0.1*x - y**2,
             ))
 
         wait('Same thing, with an intermediate file')
         gnuplot.funcutils.compute_GridData(
-            x,y, lambda x,y: math.sin(x) + 0.1*x - y**2,
+            x, y, lambda x, y: math.sin(x) + 0.1*x - y**2,
             filename=filename1)
         g.splot(gnuplot.File(filename1, binary=1))
 
         wait('Use compute_GridData in ufunc and binary mode')
         g.splot(gnuplot.funcutils.compute_GridData(
-            x,y, lambda x,y: np.sin(x) + 0.1*x - y**2,
+            x, y, lambda x, y: np.sin(x) + 0.1*x - y**2,
             ufunc=1, binary=1,
             ))
         wait('Same thing, with an intermediate file')
         gnuplot.funcutils.compute_GridData(
-            x,y, lambda x,y: np.sin(x) + 0.1*x - y**2,
+            x, y, lambda x, y: np.sin(x) + 0.1*x - y**2,
             ufunc=1, binary=1,
             filename=filename1)
         g.splot(gnuplot.File(filename1, binary=1))
