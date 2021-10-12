@@ -19,11 +19,11 @@ gp_*.py modules.
 
 """
 
-import sys, string
+import sys
 
-# Low-level communication with gnuplot is platform-dependent.  Import
-# the appropriate implementation of GnuplotProcess based on the
-# platform:
+# Low-level communication with gnuplot is platform-dependent.
+# Import the appropriate implementation of GnuplotProcess based
+# on the platform:
 if sys.platform == 'mac':
     from gp_os.gp_mac import GnuplotOpts, GnuplotProcess, test_persist
 elif sys.platform == 'win32':
@@ -45,5 +45,3 @@ def double_quote_string(s):
         s = s.replace(c, '\\' + c)
 
     return '"%s"' % (s,)
-
-
