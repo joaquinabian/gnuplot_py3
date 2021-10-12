@@ -6,7 +6,7 @@
 # This file is licensed under the GNU Lesser General Public License
 # (LGPL).  See LICENSE.txt for details.
 
-"""Setup script for the Gnuplot module distribution.
+"""Setup script for the gnuplot module distribution.
 
 """
 
@@ -16,28 +16,23 @@ from distutils.core import setup
 from __init__ import __version__
 
 long_description = """\
-Gnuplot.py is a Python package that allows you to create graphs from
-within Python using the gnuplot plotting program.
+gnuplot_py3 is a Python package that allows you to create graphs from
+within Python 3 using the gnuplot plotting program.
+Forked from Michael Haggerty's Gnuplot.py at Sourceforge.
 """
 
-setup (
+setup(
     # Distribution meta-data
-    name='gnuplot-py',
+    name='gnuplot_py3',
     version=__version__,
-    description='A Python interface to the gnuplot plotting program.',
+    description='A Python 3 interface to the gnuplot plotting program.',
     long_description=long_description,
-    author='Michael Haggerty',
-    author_email='mhagger@alum.mit.edu',
-    url='http://gnuplot-py.sourceforge.net',
+    author='Joaquin Abian',
+    author_email='gatoygata2@gmail.com',
+    url='https://github.com/joaquinabian/gnuplot_py3',
     license='LGPL',
-    # This line is a workaround for a spelling error in earlier
-    # versions of distutils.  The error has been fixed as of
-    # python2.3, but we leave this line here for compatibility with
-    # older python versions.
-    licence='LGPL',
 
     # Description of the package in the distribution
-    package_dir={'Gnuplot' : '.'},
+    package_dir={'Gnuplot': '.'},
     packages=['Gnuplot'],
     )
-
