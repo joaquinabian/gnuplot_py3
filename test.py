@@ -13,7 +13,8 @@ thorough test of many combinations of Gnuplot.py features.
 
 """
 
-import os, time, math, tempfile
+import os, time
+import math, tempfile
 import numpy as np
 
 try:
