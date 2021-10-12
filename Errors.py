@@ -1,5 +1,4 @@
-# $Id: Errors.py 244 2003-04-21 09:44:09Z mhagger $
-
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 2001-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License

@@ -1,5 +1,3 @@
-# $Id: FAQ.txt 294 2006-11-07 02:33:08Z parejkoj $
-
 Frequently Asked Questions
 
 This file is meant to answer the most frequently asked questions about

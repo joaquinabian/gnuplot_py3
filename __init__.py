@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License

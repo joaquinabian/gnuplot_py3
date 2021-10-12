@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-# $Id: utils.py 297 2007-03-30 11:25:28Z mhagger $
-
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License

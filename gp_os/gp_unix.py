@@ -1,5 +1,4 @@
-# $Id: gp_unix.py 292 2006-03-03 09:49:04Z mhagger $
-
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 1998-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License

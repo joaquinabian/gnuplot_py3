@@ -1,5 +1,3 @@
-# $Id$
-
 # This Makefile shouldn't be needed by end users.  I use it to
 # remember the commands to generate the documentation and create a
 # distribution.

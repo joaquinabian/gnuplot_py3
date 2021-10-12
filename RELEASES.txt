@@ -1,5 +1,4 @@
-# $Id$
-
+#
 These are notes about the steps to make a new release of Gnuplot.py.
 
 0. Get the current SVN version, and put it in a local directory called Gnuplot

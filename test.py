@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-# $Id: test.py 302 2008-01-14 22:15:19Z bmcage $
-
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 1999-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License

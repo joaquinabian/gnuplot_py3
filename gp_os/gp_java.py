@@ -1,5 +1,4 @@
-# $Id: gp_java.py 291 2006-03-03 08:58:48Z mhagger $
-
+# Copyright (C) 2021 Joaquin Abian <gatoygata2@gmail.com>
 # Copyright (C) 2002-2003 Michael Haggerty <mhagger@alum.mit.edu>
 #
 # This file is licensed under the GNU Lesser General Public License
