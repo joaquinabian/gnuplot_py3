@@ -240,7 +240,7 @@ class MutuallyExclusiveArgs(Arg):
                 else:
                     foundargname = argname
                     retval = cmd
-        return retval # might be None
+        return retval   # might be None
 
 
 class KeywordOrBooleanArg(Arg):
@@ -358,6 +358,7 @@ class KeywordOrBooleanArg(Arg):
 # table is used by Gnuplot.hardcopy() to construct the necessary 'set
 # terminal' command.
 
+# noinspection PyDictCreation
 terminal_opts = {}
 
 terminal_opts['postscript'] = [
@@ -413,7 +414,7 @@ terminal_opts['fig'] = [
     KeywordOrBooleanArg(options=['landscape', 'portrait']),
     KeywordOrBooleanArg(options=['metric', 'inches']),
     BareStringArg(argname='fontsize'),
-    BareStringArg(argname='size'), # needs a tuple of two doubles
+    BareStringArg(argname='size'),     # needs a tuple of two doubles
     BareStringArg(argname='thickness'),
     BareStringArg(argname='depth'),
     ]

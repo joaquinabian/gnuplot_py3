@@ -18,7 +18,8 @@ import math, tempfile
 import numpy as np
 
 try:
-    import gnuplot, gnuplot.plotitems, gnuplot.funcutils
+    import gnuplot
+    import gnuplot.plotitems, gnuplot.funcutils
 except ImportError:
     # kludge in case Gnuplot hasn't been installed as a module yet:
     import __init__
