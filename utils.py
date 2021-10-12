@@ -6,14 +6,13 @@
 # This file is licensed under the GNU Lesser General Public License
 # (LGPL).  See LICENSE.txt for details.
 
-"""utils.py -- Utility functions used by Gnuplot.
+"""utils.py -- Utility functions used by gnuplot_py3.
 
-This module contains utility functions used by Gnuplot.py which aren't
+This module contains utility functions used by gnuplot_py3 which aren't
 particularly gnuplot-related.
 
 """
 
-import string
 import numpy
 
 def float_array(m):
@@ -42,63 +41,63 @@ def float_array(m):
             print("Fatal: array dimensions not equal!")
             return None
 
-def write_array(f, set,
+def write_array(f, lols,
                 item_sep=' ',
                 nest_prefix='', nest_suffix='\n', nest_sep=''):
     """Write an array of arbitrary dimension to a file.
 
-    A general recursive array writer.  The last four parameters allow
-    a great deal of freedom in choosing the output format of the
-    array.  The defaults for those parameters give output that is
-    gnuplot-readable.  But using '(",", "{", "}", ",\n")' would output
-    an array in a format that Mathematica could read.  'item_sep'
-    should not contain '%' (or if it does, it should be escaped to
+    A general recursive array writer from a list of lists (lols).
+    The last four parameters allow a great deal of freedom in choosing the
+    output format of the array.
+    The defaults for those parameters give output that is gnuplot-readable.
+    But using '(",", "{", "}", ",\n")' would output an array in a format
+    that Mathematica could read.
+    'item_sep' should not contain '%' (or if it does, it should be escaped to
     '%%') since it is put into a format string.
 
     The default 2-d file organization::
 
-        set[0,0] set[0,1] ...
-        set[1,0] set[1,1] ...
+        lols[0,0] lols[0,1] ...
+        lols[1,0] lols[1,1] ...
 
     The 3-d format::
 
-        set[0,0,0] set[0,0,1] ...
-        set[0,1,0] set[0,1,1] ...
+        lols[0,0,0] lols[0,0,1] ...
+        lols[0,1,0] lols[0,1,1] ...
 
-        set[1,0,0] set[1,0,1] ...
-        set[1,1,0] set[1,1,1] ...
+        lols[1,0,0] lols[1,0,1] ...
+        lols[1,1,0] lols[1,1,1] ...
 
     """
 
-    if len(set.shape) == 1:
-        (columns,) = set.shape
+    if len(lols.shape) == 1:
+        (columns,) = lols.shape
         assert columns > 0
         fmt = item_sep.join(['%s'] * columns)
         f.write(nest_prefix)
-        f.write(fmt % tuple(set.tolist()))
+        f.write(fmt % tuple(lols.tolist()))
         f.write(nest_suffix)
-    elif len(set.shape) == 2:
+    elif len(lols.shape) == 2:
         # This case could be done with recursion, but `unroll' for
         # efficiency.
-        (points, columns) = set.shape
+        (points, columns) = lols.shape
         assert points > 0 and columns > 0
         fmt = item_sep.join(['%s'] * columns)
         f.write(nest_prefix + nest_prefix)
-        f.write(fmt % tuple(set[0].tolist()))
+        f.write(fmt % tuple(lols[0].tolist()))
         f.write(nest_suffix)
-        for point in set[1:]:
+        for point in lols[1:]:
             f.write(nest_sep + nest_prefix)
             f.write(fmt % tuple(point.tolist()))
             f.write(nest_suffix)
         f.write(nest_suffix)
     else:
         # Use recursion for three or more dimensions:
-        assert set.shape[0] > 0
+        assert lols.shape[0] > 0
         f.write(nest_prefix)
-        write_array(f, set[0],
+        write_array(f, lols[0],
                     item_sep, nest_prefix, nest_suffix, nest_sep)
-        for subset in set[1:]:
+        for subset in lols[1:]:
             f.write(nest_sep)
             write_array(f, subset,
                         item_sep, nest_prefix, nest_suffix, nest_sep)
-
