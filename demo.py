@@ -13,10 +13,11 @@ the Gnuplot package, see test.py.
 
 """
 
-from numpy import *
+import numpy as np
 
 # If the package has been installed correctly, this should work:
-import gnuplot, gnuplot.funcutils
+import gnuplot
+import gnuplot.funcutils
 
 
 def demo():
@@ -26,17 +27,17 @@ def demo():
     # in these examples so that the commands that are sent to gnuplot
     # are also output on stderr.
     g = gnuplot.Gnuplot(debug=1)
-    g.title('A simple example') # (optional)
-    g('set style data linespoints') # give gnuplot an arbitrary command
+    g.title('A simple example')        # (optional)
+    g('set style data linespoints')    # give gnuplot an arbitrary command
     # Plot a list of (x, y) pairs (tuples or a numpy array would
     # also be OK):
-    g.plot([[0,1.1], [1,5.8], [2,3.3], [3,4.2]])
+    g.plot([[0, 1.1], [1, 5.8], [2, 3.3], [3, 4.2]])
     input('Please press return to continue...\n')
 
     g.reset()
     # Plot one dataset from an array and one via a gnuplot function;
     # also demonstrate the use of item-specific options:
-    x = arange(10, dtype='float_')
+    x = np.arange(10, dtype='float_')
     y1 = x**2
     # Notice how this plotitem is created here but used later?  This
     # is convenient if the same dataset has to be plotted multiple
@@ -58,22 +59,22 @@ def demo():
     # squared' with a superscript (plus much, much more; see `help set
     # term postscript' in the gnuplot docs).  If your gnuplot doesn't
     # support enhanced mode, set `enhanced=0' below.
-    g.ylabel('x^2') # take advantage of enhanced postscript mode
+    g.ylabel('x^2')    # take advantage of enhanced postscript mode
     g.hardcopy('gp_test.ps', enhanced=1, color=1)
-    print ('\n******** Saved plot to postscript file "gp_test.ps" ********\n')
+    print('\n******** Saved plot to postscript file "gp_test.ps" ********\n')
     input('Please press return to continue...\n')
 
     g.reset()
     # Demonstrate a 3-d plot:
     # set up x and y values at which the function will be tabulated:
-    x = arange(35)/2.0
-    y = arange(30)/10.0 - 1.5
+    x = np.arange(35)/2.0
+    y = np.arange(30)/10.0 - 1.5
     # Make a 2-d array containing a function of x and y.  First create
     # xm and ym which contain the x and y values in a matrix form that
     # can be `broadcast' into a matrix of the appropriate shape:
-    xm = x[:,newaxis]
-    ym = y[newaxis,:]
-    m = (sin(xm) + 0.1*xm) - ym**2
+    xm = x[:, np.newaxis]
+    ym = y[np.newaxis, :]
+    m = (np.sin(xm) + 0.1*xm) - ym**2
     g('set parametric')
     g('set style data lines')
     g('set hidden')
@@ -88,24 +89,23 @@ def demo():
     # disable binary because older versions of gnuplot don't allow
     # binary data.  Change this to `binary=1' (or omit the binary
     # option) to get the advantage of binary format.
-    g.splot(gnuplot.GridData(m,x,y, binary=0))
+    g.splot(gnuplot.GridData(m, x, y, binary=0))
     input('Please press return to continue...\n')
 
     # plot another function, but letting GridFunc tabulate its values
     # automatically.  f could also be a lambda or a global function:
-    def f(x,y):
-        return 1.0 / (1 + 0.01 * x**2 + 0.5 * y**2)
+    def f(x, y):
+        return 1 / (1 + 0.01 * x**2 + 0.5 * y**2)
 
-    g.splot(gnuplot.funcutils.compute_GridData(x,y, f, binary=0))
+    g.splot(gnuplot.funcutils.compute_GridData(x, y, f, binary=0))
     input('Please press return to continue...\n')
 
     # Explicit delete shouldn't be necessary, but if you are having
     # trouble with temporary files being left behind, try uncommenting
     # the following:
-    #del g, d
+    # del g, d
 
 
 # when executed, just run demo():
 if __name__ == '__main__':
     demo()
-
