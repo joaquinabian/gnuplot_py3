@@ -1,4 +1,4 @@
-This is to announce the release of version 1.8 of Gnuplot.py.
+This is to announce the release of version 0.1 of gnuplot_py3.
 
 Gnuplot.py is a Python [1] package that allows you to create graphs
 from within Python using the gnuplot [2] plotting program.
@@ -34,15 +34,12 @@ Some ways this package can be used:
 4. Compute a series of datasets in Python and plot them one after the
    other using Gnuplot.py to produce a crude animation.
 
-New features in this version:
-  + Various bug fixes
-  + an option "filename" to Data and GridDat
-    This allows saving the data to a permanent, rather than temporary
-  + pdf terminal definition
+Features in this version:
+   +  Works on Python 3
+   +  Two and three-dimensional plots.
 
-Features already present in older versions:
 
-  +  Two and three-dimensional plots.
+Features in original GnuPlot.py not tested yet:
   +  Plot data from memory, from a file, or from an expression.
   +  Support for multiple simultaneous gnuplot sessions.
   +  Can pass arbitrary commands to the gnuplot program.
