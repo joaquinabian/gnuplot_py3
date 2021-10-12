@@ -66,20 +66,20 @@ def tabulate_function(f, xvals, yvals=None, dtype=None, ufunc=0):
         yvals = numpy.asarray(yvals, dtype)
 
         if ufunc:
-            return f(xvals[:,numpy.newaxis], yvals[numpy.newaxis,:])
+            return f(xvals[:, numpy.newaxis], yvals[numpy.newaxis, :])
         else:
             if dtype is None:
                 # choose a result dtype based on what '+' would return
                 # (yecch!):
                 dtype = (numpy.zeros((1,), xvals.dtype.char) +
-                            numpy.zeros((1,), yvals.dtype.char)).dtype.char
+                         numpy.zeros((1,), yvals.dtype.char)).dtype.char
 
             m = numpy.zeros((len(xvals), len(yvals)), dtype)
             for xi in range(len(xvals)):
                 x = xvals[xi]
                 for yi in range(len(yvals)):
                     y = yvals[yi]
-                    m[xi,yi] = f(x,y)
+                    m[xi, yi] = f(x, y)
             return m
 
 
@@ -179,4 +179,3 @@ def compute_GridData(xvals, yvals, f, ufunc=0, **keyw):
 # For backwards compatibility:
 def GridFunc(f, xvals, yvals, **keyw):
     return compute_GridData(xvals, yvals, f, **keyw)
-
