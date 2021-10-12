@@ -3,7 +3,7 @@
 # This file is licensed under the GNU Lesser General Public License
 # (LGPL).  See LICENSE.txt for details.
 
-"""_Gnuplot.py -- An object that represents a running gnuplot process.
+"""_gnuplot.py -- An object that represents a running gnuplot process.
 
 This file implements the Gnuplot plotter object, which is an abstract
 interface to a running gnuplot process.
