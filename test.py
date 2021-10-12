@@ -58,7 +58,7 @@ def main():
         f = open(filename1, 'w')
         filename2 = tempfile.mktemp()
     try:
-        for x in np.arange(100.)/5. - 10.:
+        for x in np.arange(100) / 5 - 10:
             f.write('%s %s %s\n' % (x, math.cos(x), math.sin(x)))
         f.close()
 
@@ -150,10 +150,10 @@ def main():
         g.plot(f)
 
         print('############### test Data ###################################')
-        x = np.arange(100)/5. - 10.
+        x = np.arange(100) / 5 - 10
         y1 = np.cos(x)
         y2 = np.sin(x)
-        d = np.transpose((x,y1,y2))
+        d = np.transpose((x, y1, y2))
 
         wait('Plot Data against its index')
         g.plot(gnuplot.Data(y2, inline=0))
@@ -207,7 +207,7 @@ def main():
         g.plot(gnuplot.Data(d, title='Cosine of x'))
 
         print('############### test compute_Data ###########################')
-        x = np.arange(100)/5. - 10.
+        x = np.arange(100) / 5 - 10
 
         wait('Plot Data, computed by Gnuplot.py')
         g.plot(
@@ -305,8 +305,8 @@ def main():
 
         print('############### test GridData and compute_GridData ##########')
         # set up x and y values at which the function will be tabulated:
-        x = np.arange(35) / 2.0
-        y = np.arange(30) / 10.0 - 1.5
+        x = np.arange(35) / 2
+        y = np.arange(30) / 10 - 1.5
         # Make a 2-d array containing a function of x and y.  First create
         # xm and ym which contain the x and y values in a matrix form that
         # can be `broadcast' into a matrix of the appropriate shape:
