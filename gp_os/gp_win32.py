@@ -80,7 +80,7 @@ else:
     from win32pipe import popen
 
 
-# Mac doesn't recognize persist.
+# Windows doesn't recognize persist.
 def test_persist():
     return 0
 
