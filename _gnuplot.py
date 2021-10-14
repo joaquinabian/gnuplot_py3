@@ -135,19 +135,19 @@ class Gnuplot:
     # parameter will be set using self.set_<type>(option, value),
     # where <type> is a string looked up in the following table.
     optiontypes = {
-        'title' : 'string',
-        'xlabel' : 'string',
-        'ylabel' : 'string',
-        'zlabel' : 'string',
-        'xrange' : 'range',
-        'yrange' : 'range',
-        'zrange' : 'range',
-        'trange' : 'range',
-        'urange' : 'range',
-        'vrange' : 'range',
-        'parametric' : 'boolean',
-        'polar' : 'boolean',
-        'output' : 'string',
+        'title': 'string',
+        'xlabel': 'string',
+        'ylabel': 'string',
+        'zlabel': 'string',
+        'xrange': 'range',
+        'yrange': 'range',
+        'zrange': 'range',
+        'trange': 'range',
+        'urange': 'range',
+        'vrange': 'range',
+        'parametric': 'boolean',
+        'polar': 'boolean',
+        'output': 'string',
         }
 
     def __init__(self, filename=None, persist=None, debug=0):
@@ -183,6 +183,7 @@ class Gnuplot:
         self._clear_queue()
         self.debug = debug
         self.plotcmd = 'plot'
+        self.itemlist = []
         self('set terminal %s' % (gp.GnuplotOpts.default_term,))
 
     def close(self):
@@ -347,11 +348,11 @@ class Gnuplot:
             sys.stderr.write('Press C-d to end interactive input\n')
         while 1:
             try:
-                line = raw_input('gnuplot>>> ')
+                line = input('gnuplot>>> ')
             except EOFError:
                 break
             self(line)
-            time.sleep(0.2) # give a little time for errors to be written
+            time.sleep(0.2)   # give a little time for errors to be written
         sys.stderr.write('\n')
 
     def clear(self):
@@ -432,7 +433,7 @@ class Gnuplot:
             self('set %s %s' % (option, value,))
         else:
             # Must be a tuple:
-            (minrange,maxrange) = value
+            (minrange, maxrange) = value
             if minrange is None:
                 minrange = '*'
             if maxrange is None:
@@ -444,12 +445,12 @@ class Gnuplot:
         The allowed settings and their treatments are determined from
         the optiontypes mapping."""
 
-        for (k,v) in keyw.items():
+        for (k, v) in keyw.items():
             try:
-                type = self.optiontypes[k]
+                optype = self.optiontypes[k]
             except KeyError:
                 raise 'option %s is not supported' % (k,)
-            getattr(self, 'set_%s' % type)(k, v)
+            getattr(self, 'set_%s' % optype)(k, v)
 
     def xlabel(self, s=None, offset=None, font=None):
         """Set the plot's xlabel."""
@@ -570,7 +571,7 @@ class Gnuplot:
 
         # for postscript, 'default' is not compatible with any other option
         # however 'enhanced' is set always
-        if (terminal=='postscript') and ('default' in commands):
+        if (terminal == 'postscript') and ('default' in commands):
             setterm.append('default')
         else:
             setterm.extend(commands)
@@ -580,7 +581,7 @@ class Gnuplot:
             raise errors.OptionError(
                 'The following options are unrecognized: %s'
                 % (', '.join(keyw.keys(),)
-                ))
+                   ))
 
         self.set_string('output', filename)
         self(' '.join(setterm))
@@ -589,4 +590,3 @@ class Gnuplot:
         # reset the terminal to its `default' setting:
         self('set terminal %s' % gp.GnuplotOpts.default_term)
         self.set_string('output')
-
