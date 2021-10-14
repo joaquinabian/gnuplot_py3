@@ -14,6 +14,8 @@ interfaces.
 
 """
 
+from os import popen
+
 # ############ Configuration variables: ################################
 
 class GnuplotOpts:
@@ -47,7 +49,7 @@ class GnuplotOpts:
     # the value None then the first time you create a Gnuplot object
     # it will try to detect automatically whether your version accepts
     # this option.
-    recognizes_persist = None # test automatically on first use
+    recognizes_persist = None    # test automatically on first use
 
     # What should be the default if the persist option is not
     # specified explicitly?
@@ -109,8 +111,6 @@ class GnuplotOpts:
 
 # ############ End of configuration options ############################
 
-from os import popen
-
 
 def test_persist():
     """Determine whether gnuplot recognizes the option '-persist'.
@@ -125,12 +125,11 @@ def test_persist():
     """
 
     if GnuplotOpts.recognizes_persist is None:
-        import string
         g = popen('echo | %s -persist 2>&1' % GnuplotOpts.gnuplot_command, 'r')
         response = g.readlines()
         g.close()
         GnuplotOpts.recognizes_persist = (
-            (not response) or (string.find(response[0], '-persist') == -1))
+            (not response) or (response[0].find('-persist') == -1))
     return GnuplotOpts.recognizes_persist
 
 
@@ -207,5 +206,3 @@ class GnuplotProcess:
 
         self.write(s + '\n')
         self.flush()
-
-
