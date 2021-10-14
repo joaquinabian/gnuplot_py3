@@ -16,7 +16,7 @@ behavior.
 import os, tempfile
 from io import StringIO
 import numpy
-from . import gp, utils, Errors
+from . import gp, utils, errors
 
 
 class _unset:
@@ -136,9 +136,9 @@ class PlotItem:
             try:
                 setter = self._option_list[option]
             except KeyError:
-                raise Errors.OptionError('%s=%s' % (option, value))
+                raise errors.OptionError('%s=%s' % (option, value))
             if setter is None:
-                raise Errors.OptionError(
+                raise errors.OptionError(
                     'Cannot modify %s option after construction!', option)
             else:
                 setter(self, value)
@@ -151,7 +151,7 @@ class PlotItem:
         elif isinstance(value, str):
             self._options[option] = (value, fmt % value)
         else:
-            Errors.OptionError('%s=%s' % (option, value,))
+            errors.OptionError('%s=%s' % (option, value,))
 
     def clear_option(self, name):
         """Clear (unset) a plot option.  No error if option was not set."""
@@ -316,12 +316,12 @@ class _FileItem(PlotItem):
                 '%s %s' % (name, ':'.join(subopts),),
                 )
         else:
-            raise Errors.OptionError('%s=%s' % (name, value,))
+            raise errors.OptionError('%s=%s' % (name, value,))
 
     def set_option_binary(self, binary):
         if binary:
             if not gp.GnuplotOpts.recognizes_binary_splot:
-                raise Errors.OptionError(
+                raise errors.OptionError(
                     'Gnuplot.py is currently configured to reject binary data')
             self._options['binary'] = (1, 'binary')
         else:
@@ -381,7 +381,7 @@ class _InlineFileItem(_FileItem):
             keyw['title'] = None
 
         if keyw.get('binary', 0):
-            raise Errors.OptionError('binary inline data is not supported')
+            raise errors.OptionError('binary inline data is not supported')
 
         _FileItem.__init__(self, '-', **keyw)
 
@@ -492,7 +492,7 @@ def File(filename, **keyw):
     """
 
     if not isinstance(filename, str):
-        raise Errors.OptionError(
+        raise errors.OptionError(
             'Argument (%s) must be a filename' % (filename,)
             )
     return _FileItem(filename, **keyw)
@@ -571,7 +571,7 @@ def Data(*data, **keyw):
         inline = keyw['inline']
         del keyw['inline']
         if inline and filename:
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 'cannot pass data both inline and via a file'
                 )
     else:
@@ -651,14 +651,14 @@ def GridData(data, xvals=None, yvals=None,
     try:
         (numx, numy) = data.shape
     except ValueError:
-        raise Errors.DataError('data array must be two-dimensional')
+        raise errors.DataError('data array must be two-dimensional')
 
     if xvals is None:
         xvals = numpy.arange(numx)
     else:
         xvals = utils.float_array(xvals)
         if xvals.shape != (numx,):
-            raise Errors.DataError(
+            raise errors.DataError(
                 'The size of xvals must be the same as the size of '
                 'the first dimension of the data array')
 
@@ -667,7 +667,7 @@ def GridData(data, xvals=None, yvals=None,
     else:
         yvals = utils.float_array(yvals)
         if yvals.shape != (numy,):
-            raise Errors.DataError(
+            raise errors.DataError(
                 'The size of yvals must be the same as the size of '
                 'the second dimension of the data array')
 
@@ -682,14 +682,14 @@ def GridData(data, xvals=None, yvals=None,
             and gp.GnuplotOpts.prefer_inline_data
             )
     elif inline and filename:
-        raise Errors.OptionError(
+        raise errors.OptionError(
             'cannot pass data both inline and via a file'
             )
 
     # xvals, yvals, and data are now all filled with arrays of data.
     if binary:
         if inline:
-            raise Errors.OptionError('binary inline data not supported')
+            raise errors.OptionError('binary inline data not supported')
 
         # write file in binary format
 

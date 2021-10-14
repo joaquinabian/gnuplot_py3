@@ -26,7 +26,7 @@ keyword arguments and build the 'set terminal' command.
 """
 
 
-from . import gp, Errors
+from . import gp, errors
 
 
 class Arg:
@@ -117,7 +117,7 @@ class KeywordArg(ArgOneParam):
             else:
                 return [self.fixedword, k]
         else:
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 'Illegal option %s="%s"' % (self.argname, k,))
 
 
@@ -134,7 +134,7 @@ class StringArg(ArgOneParam):
         if k is None:
             return None
         elif not isinstance(k, str):
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 'Option %s must be a string' % (self.argname,))
         else:
             retval = []
@@ -233,7 +233,7 @@ class MutuallyExclusiveArgs(Arg):
             cmd = arg(keyw)
             if cmd is not None:
                 if foundargname is not None:
-                    raise Errors.OptionError(
+                    raise errors.OptionError(
                         'Arguments %s and %s cannot both be specified'
                         % (foundargname, argname,)
                         )
@@ -308,7 +308,7 @@ class KeywordOrBooleanArg(Arg):
             elif k in self.options:
                 # Make sure it isn't contradicted by the corresponding boolean:
                 if k in keyw and not keyw[k]:
-                    raise Errors.OptionError(
+                    raise errors.OptionError(
                         'Arguments %s and %s are contradictory'
                         % (self.argname, k,)
                         )
@@ -316,7 +316,7 @@ class KeywordOrBooleanArg(Arg):
                     # Store the option into the boolean to be processed below:
                     keyw[k] = 1
             else:
-                raise Errors.OptionError(
+                raise errors.OptionError(
                     'Illegal option %s=%s' % (self.argname, k,))
 
         # Now scan the booleans and make sure that at most one is set:
@@ -328,7 +328,7 @@ class KeywordOrBooleanArg(Arg):
                 del keyw[k]
                 if newval:
                     if option is not None:
-                        raise Errors.OptionError(
+                        raise errors.OptionError(
                             'Arguments %s and %s cannot both be specified'
                             % (option, k,)
                             )

@@ -13,7 +13,7 @@ interface to a running gnuplot process.
 
 import sys
 
-from . import gp, plotitems, termdefs, Errors
+from . import gp, plotitems, termdefs, errors
 
 
 class _GnuplotFile:
@@ -176,7 +176,7 @@ class Gnuplot:
             self.gnuplot = gp.GnuplotProcess(persist=persist)
         else:
             if persist is not None:
-                raise Errors.OptionError(
+                raise errors.OptionError(
                     'Gnuplot with output to file does not allow '
                     'persist option.')
             self.gnuplot = _GnuplotFile(filename)
@@ -542,7 +542,7 @@ class Gnuplot:
 
         if filename is None:
             if gp.GnuplotOpts.default_lpr is None:
-                raise Errors.OptionError(
+                raise errors.OptionError(
                     'default_lpr is not set, so you can only print to a file.')
             filename = gp.GnuplotOpts.default_lpr
 
@@ -559,7 +559,7 @@ class Gnuplot:
         try:
             opts = termdefs.terminal_opts[terminal]
         except KeyError:
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 'Terminal "%s" is not configured in Gnuplot.py.' % (terminal,))
 
         commands = []
@@ -577,7 +577,7 @@ class Gnuplot:
 
         if keyw:
             # Not all options were consumed.
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 'The following options are unrecognized: %s'
                 % (', '.join(keyw.keys(),)
                 ))

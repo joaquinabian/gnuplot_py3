@@ -11,7 +11,7 @@ set.
 
 """
 
-import Errors
+import errors
 # in python 3 it is implemented using subprocess.Popen
 from os import popen
 
@@ -97,7 +97,7 @@ class GnuplotProcess:
         """
 
         if persist:
-            raise Errors.OptionError(
+            raise errors.OptionError(
                 '-persist is not supported under Windows!')
 
         self.gnuplot = popen(GnuplotOpts.gnuplot_command, 'w')

@@ -162,7 +162,7 @@ __version__ = '1.8'
 __all__ = ['utils', 'funcutils', ]
 
 from .gp import GnuplotOpts, GnuplotProcess, test_persist
-from .Errors import Error, OptionError, DataError
+from .errors import Error, OptionError, DataError
 from .plotitems import PlotItem, Func, File, Data, GridData
 from ._gnuplot import Gnuplot
 
