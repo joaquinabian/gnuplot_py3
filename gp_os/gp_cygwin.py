@@ -12,6 +12,9 @@ set.
 """
 
 import Errors
+# in python 3 it is implemented using subprocess.Popen
+from os import popen
+
 
 # ############ Configuration variables: ################################
 
@@ -68,22 +71,7 @@ class GnuplotOpts:
 # ############ End of configuration options ############################
 
 
-try:
-    from sys import hexversion
-except ImportError:
-    hexversion = 0
-
-if hexversion >= 0x02000000:
-    # Apparently at least as of Python 2.0b1, popen support for
-    # windows is adequate.  Give that a try:
-    from os import popen
-else:
-    # For earlier versions, you have to have the win32 extensions
-    # installed and we use the popen that it provides.
-    from win32pipe import popen
-
-
-# Mac doesn't recognize persist.
+# Windows doesn't recognize persist.
 def test_persist():
     return 0
 
@@ -131,5 +119,3 @@ class GnuplotProcess:
 
         self.write(s + '\n')
         self.flush()
-
-
