@@ -13,6 +13,11 @@ low-level interfaces.
 
 """
 
+import sys
+
+from java.lang import Thread
+from java.lang import Runtime
+
 # ############ Configuration variables: ################################
 
 class GnuplotOpts:
@@ -41,11 +46,6 @@ class GnuplotOpts:
 
 # ############ End of configuration options ############################
 
-import sys
-
-from java.lang import Thread
-from java.lang import Runtime
-
 
 def test_persist():
     """Determine whether gnuplot recognizes the option '-persist'.
@@ -60,8 +60,8 @@ class OutputProcessor(Thread):
 
     """
 
-    def __init__(self, name, input, output):
-        self.input = input
+    def __init__(self, name, _input, output):
+        self.input = _input
         self.output = output
 
         Thread.__init__(self, name)
@@ -128,7 +128,7 @@ class GnuplotProcess:
         # normally that causes a SyntaxError in CPython because "exec"
         # is a keyword.  Therefore, we call the exec() method
         # indirectly.
-        #self.process = Runtime.getRuntime().exec(command)
+        # self.process = Runtime.getRuntime().exec(command)
         exec_method = getattr(Runtime.getRuntime(), 'exec')
         self.process = exec_method(command)
 
@@ -165,5 +165,3 @@ class GnuplotProcess:
 
         self.write(s + '\n')
         self.flush()
-
-
