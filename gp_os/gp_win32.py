@@ -9,6 +9,8 @@
 """
 
 from gnuplot import Errors
+# in python 3 is implemented using subprocess.Popen
+from os import popen
 
 # ############ Configuration variables: ################################
 
@@ -63,22 +65,6 @@ class GnuplotOpts:
     prefer_enhanced_postscript = 1
 
 # ############ End of configuration options ############################
-
-
-try:
-    from sys import hexversion
-except ImportError:
-    hexversion = 0
-
-if hexversion >= 0x02000000:
-    # Apparently at least as of Python 2.0b1, popen support for
-    # windows is adequate.  Give that a try:
-    from os import popen
-else:
-    # For earlier versions, you have to have the win32 extensions
-    # installed and we use the popen that it provides.
-    from win32pipe import popen
-
 
 # Windows doesn't recognize persist.
 def test_persist():
