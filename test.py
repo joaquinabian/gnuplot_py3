@@ -32,7 +32,7 @@ except ImportError:
 
 def wait(msg=None, prompt='Press return to show results...\n'):
     if msg:
-        print(msg)
+        print(msg, flush=True)
     input(prompt)
 
 

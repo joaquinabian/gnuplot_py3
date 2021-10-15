@@ -206,11 +206,11 @@ class Gnuplot:
         for inline data) is through this method.
 
         """
-
-        self.gnuplot(s)
         if self.debug:
             # also echo to stderr for user to see:
             sys.stderr.write('gnuplot> %s\n' % (s,))
+
+        self.gnuplot(s)
 
     def refresh(self):
         """Refresh the plot, using the current 'PlotItem's.
