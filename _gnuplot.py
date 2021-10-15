@@ -55,6 +55,11 @@ class _GnuplotFile:
         self.write(s + '\n')
         self.flush()
 
+    def close(self):
+        if self.gnuplot is not None:
+            self.gnuplot.close()
+            self.gnuplot = None
+
 
 class Gnuplot:
     """Interface to a gnuplot program.
@@ -191,6 +196,7 @@ class Gnuplot:
         # working, which is generally a good thing because it delays
         # the deletion of temporary files.
         if self.gnuplot is not None:
+            # close was not defined in _gnuplot.Gnuplot
             self.gnuplot.close()
             self.gnuplot = None
 
