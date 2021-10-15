@@ -9,6 +9,7 @@
 """
 
 from gnuplot import errors
+# os.popen has not been deprecated in python 3
 # in python 3 is implemented using subprocess.Popen
 from os import popen
 
