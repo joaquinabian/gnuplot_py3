@@ -6,20 +6,26 @@
 # This file is licensed under the GNU Lesser General Public License
 # (LGPL).  See LICENSE.txt for details.
 
-"""Gnuplot -- A pipe-based interface to the gnuplot plotting program.
+"""gnuplot_py3 -- A pipe-based interface to the gnuplot plotting program.
 
-This is the main module of the Gnuplot package.
+This is the main module of the gnuplot_py3 package.
 
-Written by "Michael Haggerty", mailto:mhagger@alum.mit.edu.  Inspired
-by and partly derived from an earlier version by "Konrad Hinsen",
-mailto:hinsen@ibs.ibs.fr.  If you find a problem or have a suggestion,
-please "let me know", mailto:mhagger@alum.mit.edu.  Other feedback
-would also be appreciated.
+Originally written by "Michael Haggerty", mailto:mhagger@alum.mit.edu.
+Inspired by and partly derived from an earlier version by "Konrad Hinsen",
+mailto:hinsen@ibs.ibs.fr.
 
-The Gnuplot.py home page is at
+Forked by "Joaquin Abian" to make it compatible with Python 3.
+If you find a problem or have a suggestion,please "let me know",
+mailto:gatoygata2@gmail.com.
+Other feedback would also be appreciated.
 
-"Gnuplot.py", http://gnuplot-py.sourceforge.net
+The original Gnuplot.py home page is at
 
+http://gnuplot-py.sourceforge.net
+
+Current gnuplot_py3 is at
+
+https://github.com/joaquinabian/gnuplot_py3
 
 For information about how to use this module:
 
@@ -37,16 +43,10 @@ For information about how to use this module:
    formatting is not perfect; when in doubt, double-check the
    docstrings.
 
-You should import this file with 'import Gnuplot', not with 'from
-Gnuplot import *', because the module and the main class have the same
-name, `Gnuplot'.
-
 To obtain the gnuplot plotting program itself, see "the gnuplot FAQ",
 ftp://ftp.gnuplot.vt.edu/pub/gnuplot/faq/index.html.  Obviously you
-need to have gnuplot installed if you want to use Gnuplot.py.
+need to have gnuplot installed if you want to use gnuplot_py3.
 
-The old command-based interface to gnuplot (previously supported as
-'oldplot.py') has been removed from the package.
 
 Features:
 
@@ -56,8 +56,8 @@ Features:
  o  A gnuplot session is an instance of class 'Gnuplot'.  Multiple
     sessions can be open at once.  For example::
 
-        g1 = Gnuplot.Gnuplot()
-        g2 = Gnuplot.Gnuplot()
+        g1 = gnuplot.Gnuplot()
+        g2 = gnuplot.Gnuplot()
 
     Note that due to limitations on those platforms, opening multiple
     simultaneous sessions on Windows or Macintosh may not work
@@ -66,7 +66,7 @@ Features:
  o  The implicitly-generated gnuplot commands can be stored to a file
     instead of executed immediately::
 
-        g = Gnuplot.Gnuplot('commands.txt')
+        g = gnuplot.Gnuplot('commands.txt')
 
     The 'commands.txt' file can then be run later with gnuplot's
     'load' command.  Beware, however: the plot commands may depend on
@@ -107,7 +107,7 @@ Features:
     Communication of data from python to gnuplot is via inline data
     (through the command pipe) or via temporary files.  Temp files are
     deleted automatically when their associated 'PlotItem' is deleted.
-    The PlotItems in use by a Gnuplot object at any given time are
+    The PlotItems in use by a gnuplot_py3 object at any given time are
     stored in an internal list so that they won't be deleted
     prematurely.
 
@@ -129,14 +129,14 @@ Features:
 Restrictions:
 
  -  Relies on the numpy Python extension.  This can be obtained from
-    the Scipy group at <http://www.scipy.org/Download>.  If you're
+    the Scipy group at <https://www.scipy.org/install.html>.  If you're
     interested in gnuplot, you would probably also want numpy anyway.
 
  -  Only a small fraction of gnuplot functionality is implemented as
     explicit method functions.  However, you can give arbitrary
     commands to gnuplot manually::
 
-        g = Gnuplot.Gnuplot()
+        g = gnuplot.Gnuplot()
         g('set style data linespoints')
         g('set pointsize 5')
 
@@ -156,19 +156,20 @@ Bugs:
 
 """
 
-__version__ = '1.8'
-
-# Other modules that should be loaded for 'from Gnuplot import *':
-__all__ = ['utils', 'funcutils', ]
+__version__ = '0.1'
 
 from .gp import GnuplotOpts, GnuplotProcess, test_persist
 from .errors import Error, OptionError, DataError
 from .plotitems import PlotItem, Func, File, Data, GridData
 from ._gnuplot import Gnuplot
 
+# Other modules that should be loaded for 'from gnuplot import *':
+__all__ = ['utils', 'funcutils',
+           'GnuplotOpts', 'GnuplotProcess', 'test_persist',
+           'Error', 'OptionError', 'DataError',
+           'PlotItem', 'Func', 'File', 'Data', 'GridData',
+           'Gnuplot']
 
 if __name__ == '__main__':
     import demo
     demo.demo()
-
-
