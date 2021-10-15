@@ -13,7 +13,8 @@ interface to a running gnuplot process.
 
 import sys
 
-from . import gp, plotitems, termdefs, errors
+from . import gp, plotitems
+from . import termdefs, errors
 
 
 class _GnuplotFile:
@@ -185,6 +186,7 @@ class Gnuplot:
                     'Gnuplot with output to file does not allow '
                     'persist option.')
             self.gnuplot = _GnuplotFile(filename)
+
         self._clear_queue()
         self.debug = debug
         self.plotcmd = 'plot'
@@ -215,6 +217,7 @@ class Gnuplot:
         if self.debug:
             # also echo to stderr for user to see:
             sys.stderr.write('gnuplot> %s\n' % (s,))
+            sys.stderr.flush()
 
         self.gnuplot(s)
 
