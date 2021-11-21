@@ -25,15 +25,15 @@ import sys
 # Import the appropriate implementation of GnuplotProcess based
 # on the platform:
 if sys.platform == 'win32':
-    from gp_os.gp_win32 import GnuplotOpts, GnuplotProcess, test_persist
+    from .gp_os.gp_win32 import GnuplotOpts, GnuplotProcess, test_persist
 elif sys.platform == 'darwin':
-    from gp_os.gp_macosx import GnuplotOpts, GnuplotProcess, test_persist
+    from .gp_os.gp_macosx import GnuplotOpts, GnuplotProcess, test_persist
 elif sys.platform[:4] == 'java':
-    from gp_os.gp_java import GnuplotOpts, GnuplotProcess, test_persist
+    from .gp_os.gp_java import GnuplotOpts, GnuplotProcess, test_persist
 elif sys.platform == 'cygwin':
-    from gp_os.gp_cygwin import GnuplotOpts, GnuplotProcess, test_persist
+    from .gp_os.gp_cygwin import GnuplotOpts, GnuplotProcess, test_persist
 else:
-    from gp_os.gp_unix import GnuplotOpts, GnuplotProcess, test_persist
+    from .gp_os.gp_unix import GnuplotOpts, GnuplotProcess, test_persist
 
 
 def double_quote_string(s):
